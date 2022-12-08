@@ -69,12 +69,10 @@ Toastify({
   }).showToast()
   update(selectedItem.id);
   basket = basket.filter((x) => x.item !== 0);
-  // console.log(basket);
   localStorage.setItem("data", JSON.stringify(basket));
 };
 let update = (id) => {
   let search = basket.find((x) => x.id === id);
-  // console.log(search.item);
   document.getElementById(id).innerHTML = search.item;
   calculation();
 };
