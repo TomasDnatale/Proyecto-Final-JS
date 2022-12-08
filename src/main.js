@@ -2,10 +2,12 @@ let shop = document.getElementById("shop");
 
 let basket = JSON.parse(localStorage.getItem("data")) || [];
 
+const botonToastify = document.getElementById('toastify')
+
 let generateShop = () => {
   return (shop.innerHTML = shopItemsData
     .map((x) => {
-      let { id, name, price, desc, img } = x;
+      let { id, name, precio, desc, img } = x;
       let search = basket.find((x) => x.id === id) || [];
       return `
     <div id=product-id-${id} class="item">
@@ -13,8 +15,8 @@ let generateShop = () => {
         <div class="details">
           <h3>${name}</h3>
           <p>${desc}</p>
-          <div class="price-quantity">
-            <h2>$ ${price} </h2>
+          <div class="precio-quantity">
+            <h2>$ ${precio} </h2>
             <div class="buttons">
               <i onclick="decrement(${id})" class="bi bi-dash-square-fill"></i>
               <div id=${id} class="quantity">
@@ -45,7 +47,11 @@ let increment = (id) => {
     search.item += 1;
   }
 
-  // console.log(basket);
+
+  Toastify({
+    text:'Agregaste un producto al Carrito'
+  }).showToast()
+
   update(selectedItem.id);
   localStorage.setItem("data", JSON.stringify(basket));
 };
@@ -58,6 +64,9 @@ let decrement = (id) => {
   else {
     search.item -= 1;
   }
+Toastify({
+    text:'Eliminaste un producto del Carrito'
+  }).showToast()
   update(selectedItem.id);
   basket = basket.filter((x) => x.item !== 0);
   // console.log(basket);
@@ -71,8 +80,8 @@ let update = (id) => {
 };
 
 let calculation = () => {
-  let cartIcon = document.getElementById("cartAmount");
-  cartIcon.innerHTML = basket.map((x) => x.item).reduce((x, y) => x + y, 0);
+  let carritoIcon = document.getElementById("carritoAmount");
+  carritoIcon.innerHTML = basket.map((x) => x.item).reduce((x, y) => x + y, 0);
 };
 
 calculation();
