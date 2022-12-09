@@ -119,7 +119,7 @@ let MontoTotal = () => {
       .reduce((x, y) => x + y, 0);
     // console.log(amount);
     label.innerHTML = `
-    <h2 id="montototal">Monto Total : $ ${amount}</h2>
+    <h2>Monto Total : $ ${amount}</h2>
     <button class="checkout">Comprar</button>
     <button onclick="limpiarcarrito()" class="removeAll">Limpiar Carrito</button>
     `;
